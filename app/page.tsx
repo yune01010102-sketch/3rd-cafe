@@ -534,7 +534,7 @@ export default function ThirdCafeHomepage() {
                   <p className="font-black">MAIL</p>
 
                   <p className="mt-1 text-zinc-400">
-                    info@example.com
+                    bskanayama3rd@gmail.com
                   </p>
                 </div>
               </div>
