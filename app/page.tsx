@@ -122,7 +122,13 @@ export default function ThirdCafeHomepage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#07070a] text-white">
       {/* BACKGROUND */}
-      <div className="fixed inset-0 -z-50 bg-[radial-gradient(circle_at_top,rgba(0,255,255,0.12),transparent_35%),radial-gradient(circle_at_bottom,rgba(168,85,247,0.18),transparent_35%)]" />
+      <div className="fixed inset-0 -z-50 bg-[#07070a]" />
+
+      <div className="fixed inset-0 -z-40 bg-[radial-gradient(circle_at_15%_10%,rgba(34,211,238,0.18),transparent_28%),radial-gradient(circle_at_85%_18%,rgba(168,85,247,0.18),transparent_30%),radial-gradient(circle_at_20%_45%,rgba(236,72,153,0.12),transparent_26%),radial-gradient(circle_at_80%_55%,rgba(34,211,238,0.14),transparent_28%),radial-gradient(circle_at_25%_82%,rgba(168,85,247,0.16),transparent_30%),radial-gradient(circle_at_88%_88%,rgba(236,72,153,0.10),transparent_26%)]" />
+
+      <div className="fixed inset-0 -z-30 opacity-[0.08] bg-[linear-gradient(rgba(34,211,238,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.5)_1px,transparent_1px)] bg-[size:64px_64px]" />
+
+      <div className="fixed inset-0 -z-20 bg-[linear-gradient(to_bottom,transparent,rgba(7,7,10,0.25)_35%,rgba(7,7,10,0.65)_100%)]" />
 
       {/* HEADER */}
       <header className="sticky top-0 z-50 border-b border-cyan-500/20 bg-black/40 backdrop-blur-xl">
@@ -190,15 +196,11 @@ export default function ThirdCafeHomepage() {
 
               <br />
 
-              <span className="text-white">
-                ENTERTAINMENT
-              </span>
+              <span className="text-white">ENTERTAINMENT</span>
 
               <br />
 
-              <span className="text-zinc-500">
-                SPACE
-              </span>
+              <span className="text-zinc-500">SPACE</span>
             </h1>
 
             <p className="mt-8 max-w-xl text-lg font-medium leading-9 text-zinc-400">
@@ -229,9 +231,7 @@ export default function ThirdCafeHomepage() {
 
             <div className="mt-10 grid max-w-xl grid-cols-3 gap-4">
               <div className="rounded-3xl border border-cyan-500/20 bg-zinc-900/70 p-5 text-center shadow-[0_0_25px_rgba(34,211,238,0.1)]">
-                <p className="text-2xl font-black text-cyan-300">
-                  14:00
-                </p>
+                <p className="text-2xl font-black text-cyan-300">14:00</p>
 
                 <p className="mt-1 text-xs font-black tracking-widest text-zinc-500">
                   OPEN
@@ -239,9 +239,7 @@ export default function ThirdCafeHomepage() {
               </div>
 
               <div className="rounded-3xl border border-purple-500/20 bg-zinc-900/70 p-5 text-center shadow-[0_0_25px_rgba(168,85,247,0.1)]">
-                <p className="text-2xl font-black text-purple-300">
-                  22:00
-                </p>
+                <p className="text-2xl font-black text-purple-300">22:00</p>
 
                 <p className="mt-1 text-xs font-black tracking-widest text-zinc-500">
                   CLOSE
@@ -249,9 +247,7 @@ export default function ThirdCafeHomepage() {
               </div>
 
               <div className="rounded-3xl border border-pink-500/20 bg-zinc-900/70 p-5 text-center shadow-[0_0_25px_rgba(236,72,153,0.1)]">
-                <p className="text-2xl font-black text-pink-300">
-                  金山
-                </p>
+                <p className="text-2xl font-black text-pink-300">金山</p>
 
                 <p className="mt-1 text-xs font-black tracking-widest text-zinc-500">
                   AREA
@@ -303,9 +299,7 @@ export default function ThirdCafeHomepage() {
                 OPEN TIME
               </p>
 
-              <p className="text-3xl font-black text-cyan-300">
-                14:00〜22:00
-              </p>
+              <p className="text-3xl font-black text-cyan-300">14:00〜22:00</p>
             </div>
           </motion.div>
         </div>
@@ -314,13 +308,9 @@ export default function ThirdCafeHomepage() {
       {/* ABOUT */}
       <section id="about" className="mx-auto max-w-7xl px-5 py-20">
         <div className="mb-12 text-center">
-          <p className="font-black tracking-widest text-cyan-300">
-            ABOUT
-          </p>
+          <p className="font-black tracking-widest text-cyan-300">ABOUT</p>
 
-          <h2 className="mt-3 text-4xl font-black md:text-5xl">
-            SYSTEM
-          </h2>
+          <h2 className="mt-3 text-4xl font-black md:text-5xl">SYSTEM</h2>
         </div>
 
         <div className="grid gap-5 md:grid-cols-4">
@@ -334,9 +324,7 @@ export default function ThirdCafeHomepage() {
                   {item.icon}
                 </div>
 
-                <h3 className="text-lg font-black">
-                  {item.title}
-                </h3>
+                <h3 className="text-lg font-black">{item.title}</h3>
 
                 <p className="mt-3 text-sm leading-7 text-zinc-400">
                   {item.desc}
@@ -352,9 +340,7 @@ export default function ThirdCafeHomepage() {
         <div className="mx-auto max-w-7xl px-5">
           <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
-              <p className="font-black tracking-widest text-cyan-300">
-                MENU
-              </p>
+              <p className="font-black tracking-widest text-cyan-300">MENU</p>
 
               <h2 className="mt-3 text-4xl font-black md:text-5xl">
                 FOOD & DRINK
@@ -366,9 +352,7 @@ export default function ThirdCafeHomepage() {
                 FREE DRINK
               </p>
 
-              <p className="text-2xl font-black text-cyan-300">
-                1H ¥1,000
-              </p>
+              <p className="text-2xl font-black text-cyan-300">1H ¥1,000</p>
             </div>
           </div>
 
@@ -388,9 +372,7 @@ export default function ThirdCafeHomepage() {
 
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-lg font-black">
-                      {item.name}
-                    </h3>
+                    <h3 className="text-lg font-black">{item.name}</h3>
 
                     <p className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-sm font-black text-cyan-300">
                       {item.price}
@@ -415,9 +397,7 @@ export default function ThirdCafeHomepage() {
 
             <Gamepad2 className="relative h-12 w-12 text-cyan-300" />
 
-            <h2 className="relative mt-6 text-4xl font-black">
-              e-Sports AREA
-            </h2>
+            <h2 className="relative mt-6 text-4xl font-black">e-Sports AREA</h2>
 
             <p className="relative mt-4 leading-8 text-zinc-400">
               ゲーミングPCを活用した
@@ -430,9 +410,7 @@ export default function ThirdCafeHomepage() {
 
             <Sparkles className="relative h-12 w-12 text-purple-300" />
 
-            <h2 className="relative mt-6 text-4xl font-black">
-              AVATAR SYSTEM
-            </h2>
+            <h2 className="relative mt-6 text-4xl font-black">AVATAR SYSTEM</h2>
 
             <p className="relative mt-4 leading-8 text-zinc-400">
               Live2Dを活用した
@@ -478,9 +456,7 @@ export default function ThirdCafeHomepage() {
       <section id="access" className="py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 md:grid-cols-2">
           <div>
-            <p className="font-black tracking-widest text-cyan-300">
-              ACCESS
-            </p>
+            <p className="font-black tracking-widest text-cyan-300">ACCESS</p>
 
             <h2 className="mt-3 text-4xl font-black md:text-5xl">
               INFORMATION
@@ -509,9 +485,7 @@ export default function ThirdCafeHomepage() {
                 <div>
                   <p className="font-black">OPEN</p>
 
-                  <p className="mt-1 text-zinc-400">
-                    14:00〜22:00
-                  </p>
+                  <p className="mt-1 text-zinc-400">14:00〜22:00</p>
                 </div>
               </div>
 
@@ -521,9 +495,7 @@ export default function ThirdCafeHomepage() {
                 <div>
                   <p className="font-black">TEL</p>
 
-                  <p className="mt-1 text-zinc-400">
-                    080-4556-9593
-                  </p>
+                  <p className="mt-1 text-zinc-400">080-4556-9593</p>
                 </div>
               </div>
 
@@ -547,9 +519,7 @@ export default function ThirdCafeHomepage() {
                 <MapPin className="h-10 w-10 text-cyan-300" />
               </div>
 
-              <p className="mt-5 text-3xl font-black">
-                Google MAP
-              </p>
+              <p className="mt-5 text-3xl font-black">Google MAP</p>
 
               <p className="mt-4 leading-8 text-zinc-500">
                 名古屋市中区正木3丁目13-9
