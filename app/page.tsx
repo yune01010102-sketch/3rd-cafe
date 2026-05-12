@@ -91,7 +91,7 @@ export default function ThirdCafeHomepage() {
       category: "DRINK",
       name: "飲み放題 1時間",
       price: "¥1,000",
-      desc: "ソフトドリンク飲み放題。",
+      desc: "ソフトドリンク、アルコール飲み放題。",
       icon: "🥂",
     },
   ];
@@ -416,7 +416,7 @@ export default function ThirdCafeHomepage() {
             <Gamepad2 className="relative h-12 w-12 text-cyan-300" />
 
             <h2 className="relative mt-6 text-4xl font-black">
-              ESPORTS AREA
+              e-Sports AREA
             </h2>
 
             <p className="relative mt-4 leading-8 text-zinc-400">
@@ -548,7 +548,7 @@ export default function ThirdCafeHomepage() {
               </div>
 
               <p className="mt-5 text-3xl font-black">
-                GOOGLE MAP
+                Google MAP
               </p>
 
               <p className="mt-4 leading-8 text-zinc-500">
@@ -570,7 +570,7 @@ export default function ThirdCafeHomepage() {
             </p>
 
             <p className="mt-2 text-sm font-semibold tracking-widest text-zinc-500">
-              CYBER / ESPORTS / AVATAR / DIGITAL ART
+              CYBER / e-Sports / AVATAR / DIGITAL ART
             </p>
           </div>
 
