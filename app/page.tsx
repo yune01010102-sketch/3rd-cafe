@@ -39,20 +39,20 @@ const PHOTOS = {
 };
 
 const menuItems = [
-  { category: "PASTA", name: "カルボナーラ",      price: "¥1,200", desc: "濃厚チーズとベーコンの王道クリーム。", icon: "🍝", color: "cyan"   },
-  { category: "PASTA", name: "明太クリームパスタ", price: "¥1,200", desc: "明太子の旨味たっぷり。",               icon: "🍝", color: "cyan"   },
+  { category: "PASTA", name: "カルボナーラ",      price: "¥1,600", desc: "濃厚チーズとベーコンの王道クリーム。", icon: "🍝", color: "cyan"   },
+  { category: "PASTA", name: "明太パスタ", price: "¥1,600", desc: "明太子の旨味たっぷり。",               icon: "🍝", color: "cyan"   },
   { category: "PASTA", name: "ペペロンチーノ",    price: "¥1,200", desc: "ガーリック香る定番。",                 icon: "🍝", color: "cyan"   },
-  { category: "PASTA", name: "ナポリタン",        price: "¥1,200", desc: "喫茶店風の懐かしい味。",              icon: "🍝", color: "cyan"   },
-  { category: "ROYAL", name: "お絵描きオムライス", price: "¥1,400", desc: "王道コンカフェメニュー。",            icon: "🍳", color: "purple" },
-  { category: "ROYAL", name: "ふりふりポテト",    price: "¥800",   desc: "選べるフレーバー。",                  icon: "🍟", color: "purple" },
-  { category: "ROYAL", name: "からあげバスケット", price: "¥1,000", desc: "ジューシーな人気メニュー。",          icon: "🍗", color: "purple" },
-  { category: "ROYAL", name: "推しドリンク",      price: "¥1,200", desc: "好きなカラーで作れる。",              icon: "🥤", color: "pink"   },
-  { category: "ROYAL", name: "チェキ撮影",        price: "¥1,000", desc: "記念チェキ。",                        icon: "📷", color: "pink"   },
-  { category: "DRINK", name: "飲み放題 1時間",    price: "¥1,000", desc: "ソフトドリンク、アルコール飲み放題。",icon: "🥂", color: "cyan"   },
+  { category: "PASTA", name: "ナポリタン",        price: "¥1,500", desc: "喫茶店風の懐かしい味。",              icon: "🍝", color: "cyan"   },
+  { category: "ROYAL", name: "お絵描きオムライス", price: "¥2,000", desc: "王道コンカフェメニュー。",            icon: "🍳", color: "purple" },
+  { category: "ROYAL", name: "ポテト",    price: "¥800",   desc: "選べるフレーバー。",                  icon: "🍟", color: "purple" },
+  { category: "ROYAL", name: "クラッカーの頂点", price: "¥1,000", desc: "ジューシーな人気メニュー。",          icon: "🍗", color: "purple" },
+  { category: "ROYAL", name: "推しドリンク",      price: "¥1,400", desc: "推しのカラーで作れる。",              icon: "🥤", color: "pink"   },
+  { category: "ROYAL", name: "チェキ撮影",        price: "¥2,000", desc: "記念チェキ。",                        icon: "📷", color: "pink"   },
+  { category: "DRINK", name: "飲み放題 1時間",    price: "¥1,500", desc: "基本ドリンク飲み放題。",icon: "🥂", color: "cyan"   },
 ];
 
 const features = [
-  { icon: <Coffee   className="h-7 w-7" />, title: "CAFE SPACE",  desc: "ゆったり過ごせる近未来カフェ空間。",    color: "cyan"   },
+  { icon: <Coffee   className="h-7 w-7" />, title: "CAFE SPACE",  desc: "誰でもゆったり過ごせる近未来カフェ空間。",    color: "cyan"   },
   { icon: <Gamepad2 className="h-7 w-7" />, title: "ESPORTS",     desc: "ゲーミング体験・配信・イベント。",      color: "purple" },
   { icon: <Sparkles className="h-7 w-7" />, title: "AVATAR",      desc: "Live2Dを活用したアバター接客。",        color: "pink"   },
   { icon: <Palette  className="h-7 w-7" />, title: "DIGITAL ART", desc: "デジタルアート展示・販売。",            color: "cyan"   },
@@ -343,7 +343,7 @@ export default function ThirdCafeHomepage() {
             </div>
             <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/10 px-6 py-4 shadow-[0_0_30px_rgba(34,211,238,0.12)] backdrop-blur">
               <p className="text-[10px] font-black tracking-widest text-zinc-500">FREE DRINK</p>
-              <p className="text-2xl font-black text-cyan-300">1H ¥1,000</p>
+              <p className="text-2xl font-black text-cyan-300">1H ¥1,500</p>
             </div>
           </div>
 
