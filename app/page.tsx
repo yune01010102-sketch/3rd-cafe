@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
   Coffee,
@@ -31,54 +31,56 @@ import { Button } from "@/components/ui/button";
    フリー素材なら Unsplash 等のURLをそのまま貼れます。
    ───────────────────────────────────────── */
 const PHOTOS = {
-  hero: "",      // ヒーロー背景 (例: "https://images.unsplash.com/photo-xxxx")
+  hero: "",      // ヒーロー背景
   esports: "",   // eスポーツエリア写真
   avatar: "",    // アバターシステム写真
-  interior1: "", // 店内写真① (ヒーローカード内)
-  interior2: "", // 店内写真② (ACCESS MAP部分)
+  interior1: "", // 店内写真①
+  interior2: "", // 店内写真②
 };
 
+const GOOGLE_MAP_URL = "https://share.google/7KXwdouAWpVp5WOEg";
+
 const menuItems = [
-  { category: "PASTA", name: "カルボナーラ",      price: "¥1,600", desc: "濃厚チーズとベーコンの王道クリーム。", icon: "🍝", color: "cyan"   },
-  { category: "PASTA", name: "明太パスタ", price: "¥1,600", desc: "明太子の旨味たっぷり。",               icon: "🍝", color: "cyan"   },
-  { category: "PASTA", name: "ペペロンチーノ",    price: "¥1,200", desc: "ガーリック香る定番。",                 icon: "🍝", color: "cyan"   },
-  { category: "PASTA", name: "ナポリタン",        price: "¥1,500", desc: "喫茶店風の懐かしい味。",              icon: "🍝", color: "cyan"   },
-  { category: "ROYAL", name: "お絵描きオムライス", price: "¥2,000", desc: "王道コンカフェメニュー。",            icon: "🍳", color: "purple" },
-  { category: "ROYAL", name: "ポテト",    price: "¥800",   desc: "選べるフレーバー。",                  icon: "🍟", color: "purple" },
-  { category: "ROYAL", name: "クラッカーの頂点", price: "¥1,000", desc: "ジューシーな人気メニュー。",          icon: "🍗", color: "purple" },
-  { category: "ROYAL", name: "推しドリンク",      price: "¥1,400", desc: "推しのカラーで作れる。",              icon: "🥤", color: "pink"   },
-  { category: "ROYAL", name: "チェキ撮影",        price: "¥2,000", desc: "記念チェキ。",                        icon: "📷", color: "pink"   },
-  { category: "DRINK", name: "飲み放題 1時間",    price: "¥1,500", desc: "基本ドリンク飲み放題。",icon: "🥂", color: "cyan"   },
+  { category: "PASTA", name: "カルボナーラ", price: "¥1,600", desc: "濃厚チーズとベーコンの王道クリーム。", icon: "🍝", color: "cyan" },
+  { category: "PASTA", name: "明太パスタ", price: "¥1,600", desc: "明太子の旨味たっぷり。", icon: "🍝", color: "cyan" },
+  { category: "PASTA", name: "ペペロンチーノ", price: "¥1,200", desc: "ガーリック香る定番。", icon: "🍝", color: "cyan" },
+  { category: "PASTA", name: "ナポリタン", price: "¥1,500", desc: "喫茶店風の懐かしい味。", icon: "🍝", color: "cyan" },
+  { category: "ROYAL", name: "お絵描きオムライス", price: "¥2,000", desc: "王道コンカフェメニュー。", icon: "🍳", color: "purple" },
+  { category: "ROYAL", name: "ポテト", price: "¥800", desc: "選べるフレーバー。", icon: "🍟", color: "purple" },
+  { category: "ROYAL", name: "クラッカーの頂点", price: "¥1,000", desc: "ジューシーな人気メニュー。", icon: "🍗", color: "purple" },
+  { category: "ROYAL", name: "推しドリンク", price: "¥1,400", desc: "推しのカラーで作れる。", icon: "🥤", color: "pink" },
+  { category: "ROYAL", name: "チェキ撮影", price: "¥2,000", desc: "記念チェキ。", icon: "📷", color: "pink" },
+  { category: "DRINK", name: "飲み放題 1時間", price: "¥1,500", desc: "基本ドリンク飲み放題。", icon: "🥂", color: "cyan" },
 ];
 
 const features = [
-  { icon: <Coffee   className="h-7 w-7" />, title: "CAFE SPACE",  desc: "誰でもゆったり過ごせる近未来カフェ空間。",    color: "cyan"   },
-  { icon: <Gamepad2 className="h-7 w-7" />, title: "ESPORTS",     desc: "ゲーミング体験・配信・イベント。",      color: "purple" },
-  { icon: <Sparkles className="h-7 w-7" />, title: "AVATAR",      desc: "Live2Dを活用したアバター接客。",        color: "pink"   },
-  { icon: <Palette  className="h-7 w-7" />, title: "DIGITAL ART", desc: "デジタルアート展示・販売。",            color: "cyan"   },
+  { icon: <Coffee className="h-7 w-7" />, title: "CAFE SPACE", desc: "誰でもゆったり過ごせる近未来カフェ空間。", color: "cyan" },
+  { icon: <Gamepad2 className="h-7 w-7" />, title: "ESPORTS", desc: "ゲーミング体験・配信・イベント。", color: "purple" },
+  { icon: <Sparkles className="h-7 w-7" />, title: "AVATAR", desc: "Live2Dを活用したアバター接客。", color: "pink" },
+  { icon: <Palette className="h-7 w-7" />, title: "DIGITAL ART", desc: "デジタルアート展示・販売。", color: "cyan" },
 ];
 
 const colorMap = {
   cyan: {
-    border:  "border-cyan-500/20 hover:border-cyan-400/50",
-    iconBg:  "border-cyan-500/20 bg-cyan-500/10 text-cyan-300",
-    badge:   "border-cyan-500/20 bg-cyan-500/10 text-cyan-300",
-    glow:    "shadow-[0_0_30px_rgba(34,211,238,0.1)]",
-    text:    "text-cyan-300",
+    border: "border-cyan-500/20 hover:border-cyan-400/50",
+    iconBg: "border-cyan-500/20 bg-cyan-500/10 text-cyan-300",
+    badge: "border-cyan-500/20 bg-cyan-500/10 text-cyan-300",
+    glow: "shadow-[0_0_30px_rgba(34,211,238,0.1)]",
+    text: "text-cyan-300",
   },
   purple: {
-    border:  "border-purple-500/20 hover:border-purple-400/50",
-    iconBg:  "border-purple-500/20 bg-purple-500/10 text-purple-300",
-    badge:   "border-purple-500/20 bg-purple-500/10 text-purple-300",
-    glow:    "shadow-[0_0_30px_rgba(168,85,247,0.1)]",
-    text:    "text-purple-300",
+    border: "border-purple-500/20 hover:border-purple-400/50",
+    iconBg: "border-purple-500/20 bg-purple-500/10 text-purple-300",
+    badge: "border-purple-500/20 bg-purple-500/10 text-purple-300",
+    glow: "shadow-[0_0_30px_rgba(168,85,247,0.1)]",
+    text: "text-purple-300",
   },
   pink: {
-    border:  "border-pink-500/20 hover:border-pink-400/50",
-    iconBg:  "border-pink-500/20 bg-pink-500/10 text-pink-300",
-    badge:   "border-pink-500/20 bg-pink-500/10 text-pink-300",
-    glow:    "shadow-[0_0_30px_rgba(236,72,153,0.1)]",
-    text:    "text-pink-300",
+    border: "border-pink-500/20 hover:border-pink-400/50",
+    iconBg: "border-pink-500/20 bg-pink-500/10 text-pink-300",
+    badge: "border-pink-500/20 bg-pink-500/10 text-pink-300",
+    glow: "shadow-[0_0_30px_rgba(236,72,153,0.1)]",
+    text: "text-pink-300",
   },
 };
 
@@ -107,17 +109,18 @@ function GlitchText({ text }: { text: string }) {
 export default function ThirdCafeHomepage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#060608] text-white font-sans">
-
       {/* ── BACKGROUNDS ─────────────────────────────── */}
       <div className="fixed inset-0 -z-50 bg-[#060608]" />
       <div className="fixed inset-0 -z-40 bg-[radial-gradient(ellipse_at_10%_5%,rgba(34,211,238,0.22),transparent_35%),radial-gradient(ellipse_at_90%_15%,rgba(168,85,247,0.2),transparent_35%),radial-gradient(ellipse_at_15%_55%,rgba(236,72,153,0.14),transparent_30%),radial-gradient(ellipse_at_80%_65%,rgba(34,211,238,0.14),transparent_30%),radial-gradient(ellipse_at_50%_100%,rgba(168,85,247,0.1),transparent_40%)]" />
       <div className="fixed inset-0 -z-30 opacity-[0.055] bg-[linear-gradient(rgba(34,211,238,1)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,1)_1px,transparent_1px)] bg-[size:48px_48px]" />
       <div
         className="pointer-events-none fixed inset-0 -z-20"
-        style={{ background: "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 4px)" }}
+        style={{
+          background:
+            "repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 4px)",
+        }}
       />
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(0,0,0,0.7)_100%)]" />
-
 
       {/* ── HEADER ───────────────────────────────────── */}
       <header className="sticky top-0 z-50 border-b border-cyan-500/15 bg-black/50 backdrop-blur-2xl">
@@ -131,7 +134,9 @@ export default function ThirdCafeHomepage() {
               <p className="bg-gradient-to-r from-cyan-200 via-purple-200 to-pink-300 bg-clip-text text-base font-black tracking-tight text-transparent">
                 Peer Support Cafe 3rd
               </p>
-              <p className="text-[10px] font-bold tracking-[0.3em] text-zinc-600">CYBER / ESPORTS / AVATAR</p>
+              <p className="text-[10px] font-bold tracking-[0.3em] text-zinc-600">
+                CYBER / ESPORTS / AVATAR
+              </p>
             </div>
           </div>
 
@@ -147,17 +152,17 @@ export default function ThirdCafeHomepage() {
             ))}
           </nav>
 
-          <Button className="h-9 rounded-lg border border-cyan-400/60 bg-cyan-500/10 px-5 text-xs font-black tracking-widest text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.25)] transition hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_25px_rgba(34,211,238,0.6)]">
-            CONTACT
+          <Button
+            asChild
+            className="h-9 rounded-lg border border-cyan-400/60 bg-cyan-500/10 px-5 text-xs font-black tracking-widest text-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.25)] transition hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_25px_rgba(34,211,238,0.6)]"
+          >
+            <a href="tel:08045569593">CONTACT</a>
           </Button>
         </div>
       </header>
 
-
       {/* ── HERO ─────────────────────────────────────── */}
       <section className="relative min-h-[90vh] flex items-center">
-
-        {/* Hero BG photo (PHOTOS.hero に URL を設定すると表示されます) */}
         {PHOTOS.hero && (
           <div className="absolute inset-0 -z-10 overflow-hidden">
             <img src={PHOTOS.hero} alt="3rd Cafe" className="h-full w-full object-cover opacity-20" />
@@ -166,11 +171,11 @@ export default function ThirdCafeHomepage() {
         )}
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-5 py-24 md:grid-cols-2">
-
-          {/* Left copy */}
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <motion.div
-              initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-xs font-black tracking-widest text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.15)]"
             >
               <Crown className="h-3.5 w-3.5" />
@@ -179,51 +184,83 @@ export default function ThirdCafeHomepage() {
             </motion.div>
 
             <h1 className="text-6xl font-black leading-[1.05] tracking-tight md:text-8xl">
-              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-                className="block bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-400 bg-clip-text text-transparent">
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="block bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-400 bg-clip-text text-transparent"
+              >
                 <GlitchText text="NEO" />
               </motion.span>
-              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45 }}
-                className="block text-white">
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.45 }}
+                className="block text-white"
+              >
                 ENTER
               </motion.span>
-              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
-                className="block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+              >
                 TAINMENT
               </motion.span>
             </h1>
 
-            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }}
-              className="mt-8 max-w-md text-base font-medium leading-8 text-zinc-400">
-              eスポーツ・アバター接客・デジタルアートを融合した<br />次世代エンターテインメントカフェです。
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.75 }}
+              className="mt-8 max-w-md text-base font-medium leading-8 text-zinc-400"
+            >
+              eスポーツ・アバター接客・デジタルアートを融合した
+              <br />
+              次世代エンターテインメントカフェです。
             </motion.p>
 
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }}
-              className="mt-8 flex gap-3">
-              <Button asChild
-                className="group relative overflow-hidden rounded-xl border border-cyan-400/60 bg-cyan-500/10 px-8 py-6 text-sm font-black tracking-widest text-cyan-300 shadow-[0_0_25px_rgba(34,211,238,0.2)] transition hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_40px_rgba(34,211,238,0.5)]">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+              className="mt-8 flex gap-3"
+            >
+              <Button
+                asChild
+                className="group relative overflow-hidden rounded-xl border border-cyan-400/60 bg-cyan-500/10 px-8 py-6 text-sm font-black tracking-widest text-cyan-300 shadow-[0_0_25px_rgba(34,211,238,0.2)] transition hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_40px_rgba(34,211,238,0.5)]"
+              >
                 <a href="#menu">
                   MENU <ChevronRight className="ml-1 h-4 w-4 transition group-hover:translate-x-1" />
                 </a>
               </Button>
-              <Button asChild variant="outline"
-                className="rounded-xl border-zinc-700/60 bg-zinc-900/50 px-8 py-6 text-sm font-black tracking-widest text-zinc-300 backdrop-blur hover:bg-zinc-800 hover:text-white">
+              <Button
+                asChild
+                variant="outline"
+                className="rounded-xl border-zinc-700/60 bg-zinc-900/50 px-8 py-6 text-sm font-black tracking-widest text-zinc-300 backdrop-blur hover:bg-zinc-800 hover:text-white"
+              >
                 <a href="#access">ACCESS</a>
               </Button>
             </motion.div>
 
-            {/* ★ 文字かぶり修正: 3枚のカードをシンプルな横並びに */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.0 }}
-              className="mt-10 flex gap-3">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.0 }}
+              className="mt-10 flex gap-3"
+            >
               {[
-                { label: "OPEN",  value: "14:00", color: "cyan"   as const },
+                { label: "OPEN", value: "14:00", color: "cyan" as const },
                 { label: "CLOSE", value: "22:00", color: "purple" as const },
-                { label: "AREA",  value: "金山",  color: "pink"   as const },
+                { label: "AREA", value: "金山", color: "pink" as const },
               ].map(({ label, value, color }) => {
                 const c = colorMap[color];
                 return (
-                  <div key={label}
-                    className={`flex-1 rounded-2xl border ${c.border} bg-zinc-900/70 p-4 text-center backdrop-blur-sm ${c.glow}`}>
+                  <div
+                    key={label}
+                    className={`flex-1 rounded-2xl border ${c.border} bg-zinc-900/70 p-4 text-center backdrop-blur-sm ${c.glow}`}
+                  >
                     <p className={`text-xl font-black ${c.text}`}>{value}</p>
                     <p className="mt-1 text-[10px] font-black tracking-[0.25em] text-zinc-500">{label}</p>
                   </div>
@@ -232,9 +269,9 @@ export default function ThirdCafeHomepage() {
             </motion.div>
           </motion.div>
 
-          {/* Right visual card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
@@ -245,27 +282,24 @@ export default function ThirdCafeHomepage() {
                 CYBER ENTERTAINMENT
               </div>
 
-              {/* Main photo area */}
               <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-cyan-500/10">
                 {PHOTOS.interior1 ? (
                   <img src={PHOTOS.interior1} alt="店内" className="h-full w-full object-cover" />
                 ) : (
-                  /* ★ 文字かぶり修正: 浮かぶアイコンと中央テキストをz-indexで分離、余白を確保 */
                   <div className="relative flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-cyan-500/10 via-zinc-900 to-purple-500/10">
-                    {/* Corner icons */}
                     <div className="absolute left-5 top-5 rounded-2xl border border-cyan-500/20 bg-black/50 p-3 backdrop-blur-sm">
-                      <Coffee   className="h-6 w-6 text-cyan-300" />
+                      <Coffee className="h-6 w-6 text-cyan-300" />
                     </div>
                     <div className="absolute right-5 top-5 rounded-2xl border border-purple-500/20 bg-black/50 p-3 backdrop-blur-sm">
                       <Gamepad2 className="h-6 w-6 text-purple-300" />
                     </div>
                     <div className="absolute bottom-5 left-5 rounded-2xl border border-pink-500/20 bg-black/50 p-3 backdrop-blur-sm">
-                      <Palette  className="h-6 w-6 text-pink-300" />
+                      <Palette className="h-6 w-6 text-pink-300" />
                     </div>
                     <div className="absolute bottom-5 right-5 rounded-2xl border border-cyan-500/20 bg-black/50 p-3 backdrop-blur-sm">
-                      <Zap      className="h-6 w-6 text-cyan-300" />
+                      <Zap className="h-6 w-6 text-cyan-300" />
                     </div>
-                    {/* Center — 絵文字と文字の間に十分な gap を確保してかぶりを防止 */}
+
                     <div className="relative z-10 flex flex-col items-center gap-4 px-4 text-center">
                       <p className="text-5xl">☕🎮✨</p>
                       <p className="bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-400 bg-clip-text text-2xl font-black text-transparent">
@@ -280,7 +314,6 @@ export default function ThirdCafeHomepage() {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               </div>
 
-              {/* ★ 文字かぶり修正: 時刻表示をカードの外に飛び出させず、内部のバーに収める */}
               <div className="mt-3 flex items-center justify-between rounded-2xl border border-cyan-500/10 bg-black/40 px-5 py-3">
                 <div>
                   <p className="text-[10px] font-black tracking-widest text-zinc-500">OPEN TIME</p>
@@ -296,7 +329,6 @@ export default function ThirdCafeHomepage() {
         </div>
       </section>
 
-
       {/* ── ABOUT ────────────────────────────────────── */}
       <section id="about" className="mx-auto max-w-7xl px-5 py-20">
         <div className="mb-14 text-center">
@@ -311,9 +343,13 @@ export default function ThirdCafeHomepage() {
           {features.map((item, i) => {
             const c = colorMap[item.color as keyof typeof colorMap];
             return (
-              <motion.div key={item.title}
-                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
                 <Card className={`group rounded-[2rem] border ${c.border} bg-zinc-900/50 text-white ${c.glow} backdrop-blur transition-all duration-300 hover:-translate-y-2`}>
                   <CardContent className="p-7">
                     <div className={`mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border ${c.iconBg} transition group-hover:scale-110`}>
@@ -329,7 +365,6 @@ export default function ThirdCafeHomepage() {
         </div>
       </section>
 
-
       {/* ── MENU ─────────────────────────────────────── */}
       <section id="menu" className="py-20">
         <div className="mx-auto max-w-7xl px-5">
@@ -337,7 +372,9 @@ export default function ThirdCafeHomepage() {
             <div>
               <p className="text-xs font-black tracking-[0.4em] text-cyan-400">MENU</p>
               <h2 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
-                <span className="bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">FOOD & DRINK</span>
+                <span className="bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
+                  FOOD & DRINK
+                </span>
               </h2>
               <div className="mt-5 h-px w-24 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
             </div>
@@ -351,9 +388,13 @@ export default function ThirdCafeHomepage() {
             {menuItems.map((item, i) => {
               const c = colorMap[item.color as keyof typeof colorMap];
               return (
-                <motion.div key={item.name}
-                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                >
                   <Card className={`group overflow-hidden rounded-[2rem] border ${c.border} bg-zinc-900/60 text-white ${c.glow} transition-all duration-300 hover:-translate-y-1`}>
                     <div className="relative flex aspect-[5/3] items-center justify-center overflow-hidden border-b border-white/5 bg-gradient-to-br from-zinc-900 to-zinc-950 text-6xl">
                       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 transition group-hover:opacity-100" />
@@ -365,7 +406,9 @@ export default function ThirdCafeHomepage() {
                     <CardContent className="p-5">
                       <div className="flex items-start justify-between gap-3">
                         <h3 className="text-base font-black">{item.name}</h3>
-                        <p className={`shrink-0 rounded-full border ${c.badge} px-3 py-0.5 text-sm font-black`}>{item.price}</p>
+                        <p className={`shrink-0 rounded-full border ${c.badge} px-3 py-0.5 text-sm font-black`}>
+                          {item.price}
+                        </p>
                       </div>
                       <p className="mt-2 text-sm leading-6 text-zinc-500">{item.desc}</p>
                     </CardContent>
@@ -377,19 +420,23 @@ export default function ThirdCafeHomepage() {
         </div>
       </section>
 
-
       {/* ── SPACE ────────────────────────────────────── */}
       <section id="space" className="mx-auto max-w-7xl px-5 py-20">
         <div className="grid gap-6 md:grid-cols-2">
-
-          {/* e-Sports */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="group relative overflow-hidden rounded-[2.5rem] border border-cyan-500/20 bg-zinc-900/60 shadow-[0_0_50px_rgba(34,211,238,0.07)] transition hover:border-cyan-500/40">
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="group relative overflow-hidden rounded-[2.5rem] border border-cyan-500/20 bg-zinc-900/60 shadow-[0_0_50px_rgba(34,211,238,0.07)] transition hover:border-cyan-500/40"
+          >
             <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl transition group-hover:bg-cyan-500/20" />
             <div className="relative aspect-[16/9] overflow-hidden">
               {PHOTOS.esports ? (
-                <img src={PHOTOS.esports} alt="eスポーツエリア" className="h-full w-full object-cover transition group-hover:scale-105" />
+                <img
+                  src={PHOTOS.esports}
+                  alt="eスポーツエリア"
+                  className="h-full w-full object-cover transition group-hover:scale-105"
+                />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-cyan-500/10 via-zinc-900 to-zinc-950">
                   <Gamepad2 className="h-20 w-20 text-zinc-700" />
@@ -400,18 +447,26 @@ export default function ThirdCafeHomepage() {
             <div className="relative p-8">
               <Gamepad2 className="h-10 w-10 text-cyan-300" />
               <h2 className="mt-4 text-3xl font-black">e-Sports AREA</h2>
-              <p className="mt-3 text-sm leading-8 text-zinc-400">ゲーミングPCを活用したeスポーツ・配信・イベントスペース。</p>
+              <p className="mt-3 text-sm leading-8 text-zinc-400">
+                ゲーミングPCを活用したeスポーツ・配信・イベントスペース。
+              </p>
             </div>
           </motion.div>
 
-          {/* Avatar */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="group relative overflow-hidden rounded-[2.5rem] border border-purple-500/20 bg-zinc-900/60 shadow-[0_0_50px_rgba(168,85,247,0.07)] transition hover:border-purple-500/40">
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="group relative overflow-hidden rounded-[2.5rem] border border-purple-500/20 bg-zinc-900/60 shadow-[0_0_50px_rgba(168,85,247,0.07)] transition hover:border-purple-500/40"
+          >
             <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-purple-500/10 blur-3xl transition group-hover:bg-purple-500/20" />
             <div className="relative aspect-[16/9] overflow-hidden">
               {PHOTOS.avatar ? (
-                <img src={PHOTOS.avatar} alt="アバターシステム" className="h-full w-full object-cover transition group-hover:scale-105" />
+                <img
+                  src={PHOTOS.avatar}
+                  alt="アバターシステム"
+                  className="h-full w-full object-cover transition group-hover:scale-105"
+                />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-500/10 via-zinc-900 to-zinc-950">
                   <Sparkles className="h-20 w-20 text-zinc-700" />
@@ -422,30 +477,35 @@ export default function ThirdCafeHomepage() {
             <div className="relative p-8">
               <Sparkles className="h-10 w-10 text-purple-300" />
               <h2 className="mt-4 text-3xl font-black">AVATAR SYSTEM</h2>
-              <p className="mt-3 text-sm leading-8 text-zinc-400">Live2Dを活用した次世代アバター接客システム。</p>
+              <p className="mt-3 text-sm leading-8 text-zinc-400">
+                Live2Dを活用した次世代アバター接客システム。
+              </p>
             </div>
           </motion.div>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           {[
-            { icon: <Heart      className="h-5 w-5" />, text: "推しドリンク",  color: "pink"   as const },
-            { icon: <Camera     className="h-5 w-5" />, text: "チェキ撮影",    color: "cyan"   as const },
-            { icon: <Music2     className="h-5 w-5" />, text: "イベント利用",  color: "purple" as const },
-            { icon: <GlassWater className="h-5 w-5" />, text: "飲み放題",      color: "cyan"   as const },
+            { icon: <Heart className="h-5 w-5" />, text: "推しドリンク", color: "pink" as const },
+            { icon: <Camera className="h-5 w-5" />, text: "チェキ撮影", color: "cyan" as const },
+            { icon: <Music2 className="h-5 w-5" />, text: "イベント利用", color: "purple" as const },
+            { icon: <GlassWater className="h-5 w-5" />, text: "飲み放題", color: "cyan" as const },
           ].map((item) => {
             const c = colorMap[item.color];
             return (
-              <div key={item.text}
-                className={`flex items-center gap-3 rounded-2xl border ${c.border} bg-zinc-900/60 p-4 font-black ${c.glow} backdrop-blur transition hover:-translate-y-0.5`}>
-                <div className={`flex h-10 w-10 items-center justify-center rounded-xl border ${c.iconBg}`}>{item.icon}</div>
+              <div
+                key={item.text}
+                className={`flex items-center gap-3 rounded-2xl border ${c.border} bg-zinc-900/60 p-4 font-black ${c.glow} backdrop-blur transition hover:-translate-y-0.5`}
+              >
+                <div className={`flex h-10 w-10 items-center justify-center rounded-xl border ${c.iconBg}`}>
+                  {item.icon}
+                </div>
                 <span className="text-sm">{item.text}</span>
               </div>
             );
           })}
         </div>
       </section>
-
 
       {/* ── ACCESS ───────────────────────────────────── */}
       <section id="access" className="py-20">
@@ -459,11 +519,51 @@ export default function ThirdCafeHomepage() {
 
             <div className="mt-8 space-y-5 rounded-[2rem] border border-cyan-500/10 bg-zinc-900/60 p-7 shadow-[0_0_40px_rgba(34,211,238,0.05)] backdrop-blur">
               {[
-                { icon: <MapPin className="h-5 w-5 text-cyan-300" />, label: "ADDRESS",
-                  content: <><p>〒460-0024</p><p>愛知県名古屋市中区正木3丁目13-9</p><p>BS金山ビル1F</p></> },
-                { icon: <Clock  className="h-5 w-5 text-cyan-300" />, label: "OPEN",    content: <p>14:00〜22:00</p> },
-                { icon: <Phone  className="h-5 w-5 text-cyan-300" />, label: "TEL",     content: <p>080-4556-9593</p> },
-                { icon: <Mail   className="h-5 w-5 text-cyan-300" />, label: "MAIL",    content: <p>bskanayama3rd@gmail.com</p> },
+                {
+                  icon: <MapPin className="h-5 w-5 text-cyan-300" />,
+                  label: "ADDRESS",
+                  content: (
+                    <a
+                      href={GOOGLE_MAP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block rounded-lg transition hover:text-cyan-300 hover:underline"
+                    >
+                      <p>〒460-0024</p>
+                      <p>愛知県名古屋市中区正木3丁目13-9</p>
+                      <p>BS金山ビル1F</p>
+                    </a>
+                  ),
+                },
+                {
+                  icon: <Clock className="h-5 w-5 text-cyan-300" />,
+                  label: "OPEN",
+                  content: <p>14:00〜22:00</p>,
+                },
+                {
+                  icon: <Phone className="h-5 w-5 text-cyan-300" />,
+                  label: "TEL",
+                  content: (
+                    <a
+                      href="tel:08045569593"
+                      className="inline-block transition hover:text-cyan-300 hover:underline"
+                    >
+                      080-4556-9593
+                    </a>
+                  ),
+                },
+                {
+                  icon: <Mail className="h-5 w-5 text-cyan-300" />,
+                  label: "MAIL",
+                  content: (
+                    <a
+                      href="mailto:bskanayama3rd@gmail.com"
+                      className="inline-block transition hover:text-cyan-300 hover:underline"
+                    >
+                      bskanayama3rd@gmail.com
+                    </a>
+                  ),
+                },
               ].map(({ icon, label, content }) => (
                 <div key={label} className="flex gap-4">
                   <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-cyan-500/10">
@@ -492,11 +592,16 @@ export default function ThirdCafeHomepage() {
                 <div>
                   <p className="text-2xl font-black">Google MAP</p>
                   <p className="mt-3 text-sm leading-8 text-zinc-500">
-                    名古屋市中区正木3丁目13-9<br />BS金山ビル1F
+                    名古屋市中区正木3丁目13-9
+                    <br />
+                    BS金山ビル1F
                   </p>
-                  <a href="https://maps.google.com/?q=名古屋市中区正木3丁目13-9"
-                    target="_blank" rel="noopener noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-5 py-2.5 text-xs font-black tracking-widest text-cyan-300 transition hover:bg-cyan-400 hover:text-black">
+                  <a
+                    href={GOOGLE_MAP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-5 py-2.5 text-xs font-black tracking-widest text-cyan-300 transition hover:bg-cyan-400 hover:text-black"
+                  >
                     MAP を開く <ChevronRight className="h-3.5 w-3.5" />
                   </a>
                 </div>
@@ -506,7 +611,6 @@ export default function ThirdCafeHomepage() {
         </div>
       </section>
 
-
       {/* ── FOOTER ───────────────────────────────────── */}
       <footer className="relative overflow-hidden border-t border-cyan-500/10 bg-black/60 px-5 py-14 backdrop-blur-xl">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(34,211,238,0.06),transparent_60%)]" />
@@ -515,7 +619,9 @@ export default function ThirdCafeHomepage() {
             <p className="bg-gradient-to-r from-cyan-300 via-purple-300 to-pink-400 bg-clip-text text-2xl font-black text-transparent">
               Peer Support Cafe 3rd
             </p>
-            <p className="mt-1 text-[11px] font-bold tracking-[0.3em] text-zinc-600">CYBER / e-Sports / AVATAR / DIGITAL ART</p>
+            <p className="mt-1 text-[11px] font-bold tracking-[0.3em] text-zinc-600">
+              CYBER / e-Sports / AVATAR / DIGITAL ART
+            </p>
           </div>
           <div className="space-y-1.5 text-xs font-medium text-zinc-600">
             <p>〒460-0024 愛知県名古屋市中区正木3丁目13-9 BS金山ビル1F</p>
@@ -524,11 +630,12 @@ export default function ThirdCafeHomepage() {
         </div>
         <div className="relative mx-auto mt-10 flex max-w-7xl items-center gap-4">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
-          <p className="text-[10px] font-bold tracking-[0.3em] text-zinc-700">© 2026 PEER SUPPORT CAFE 3RD</p>
+          <p className="text-[10px] font-bold tracking-[0.3em] text-zinc-700">
+            © 2026 PEER SUPPORT CAFE 3RD
+          </p>
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
         </div>
       </footer>
-
     </main>
   );
 }
