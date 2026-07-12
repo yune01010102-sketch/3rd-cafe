@@ -60,7 +60,7 @@ const menuItems = [
   {
     category: "PASTA",
     name: "ジェノベーゼ",
-    price: "¥1,600",
+    price: "¥1,300",
     desc: "王道ジェノベーゼ",
     icon: "🍝",
     color: "cyan",
@@ -115,7 +115,23 @@ const menuItems = [
   },
   {
     category: "ROYAL",
-    name: "チェキ撮影",
+    name: "チェキ撮影キャスト単品(落書き無し)",
+    price: "¥800",
+    desc: "記念チェキ。",
+    icon: "📷",
+    color: "pink",
+  },
+  {
+    category: "ROYAL",
+    name: "チェキ撮影キャスト単品(落書きあり)",
+    price: "¥1,200",
+    desc: "記念チェキ。",
+    icon: "📷",
+    color: "pink",
+  },
+  {
+    category: "ROYAL",
+    name: "チェキ撮影ツーショット(落書きあり)",
     price: "¥2,000",
     desc: "記念チェキ。",
     icon: "📷",
